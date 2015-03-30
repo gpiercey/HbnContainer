@@ -1655,9 +1655,13 @@ public class HbnContainer<T> implements Container, Container.Indexed, Container.
 	/**
 	 * This method was added mainly to allow unit tests to be written to cover the filter add/remove methods.
 	 */
-	public Set<ContainerFilter> getContainerFilters()
+	public Set<Filter> getContainerFilters()
 	{
-		return filters;
+		if (filters != null) {
+			return new HashSet<Filter>(filters);
+		} else {
+			return null;
+		}
 	}
 
 	/**

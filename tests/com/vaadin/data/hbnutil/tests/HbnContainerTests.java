@@ -1,17 +1,26 @@
 package com.vaadin.data.hbnutil.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 import java.util.Set;
 
-import org.hibernate.*;
-import org.junit.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import com.vaadin.data.Container.Filter;
 import com.vaadin.data.Container.ItemSetChangeEvent;
 import com.vaadin.data.Container.ItemSetChangeListener;
-import com.vaadin.data.hbnutil.*;
+import com.vaadin.data.hbnutil.HbnContainer;
+import com.vaadin.data.hbnutil.filter.ContainerFilter;
+import com.vaadin.data.hbnutil.filter.StringContainerFilter;
 import com.vaadin.data.util.filter.SimpleStringFilter;
 
 public class HbnContainerTests
@@ -202,7 +211,7 @@ public class HbnContainerTests
 		final ContainerFilter filter = new StringContainerFilter("title", "abc", true, false);
 		container.addContainerFilter(filter);
 		
-		Set<ContainerFilter> filters = container.getContainerFilters();
+		Set<Filter> filters = container.getContainerFilters();
 		assertTrue(filters.contains(filter));
 		
 		container.removeAllContainerFilters();
@@ -214,7 +223,7 @@ public class HbnContainerTests
 		final ContainerFilter filter = new StringContainerFilter("title", "abc", true, false);
 		container.addContainerFilter(filter);
 		
-		Set<ContainerFilter> filters = container.getContainerFilters();
+		Set<Filter> filters = container.getContainerFilters();
 		assertTrue(filters.contains(filter));
 		
 		container.removeContainerFilters("title");
@@ -229,7 +238,7 @@ public class HbnContainerTests
 		final Filter filter = new SimpleStringFilter("title", "abc", true, false);
 		container.addContainerFilter(filter);
 		
-		Set<ContainerFilter> filters = container.getContainerFilters();
+		Set<Filter> filters = container.getContainerFilters();
 		assertTrue(filters.size() == 1); // lame
 		
 		container.removeAllContainerFilters();
