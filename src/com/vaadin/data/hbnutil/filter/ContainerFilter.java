@@ -15,7 +15,10 @@ package com.vaadin.data.hbnutil.filter;
 
 import org.hibernate.criterion.Criterion;
 
-public abstract class ContainerFilter
+import com.vaadin.data.Item;
+import com.vaadin.data.Container.Filter;
+
+public abstract class ContainerFilter implements Filter
 {
 	private final Object propertyId;
 
@@ -36,6 +39,14 @@ public abstract class ContainerFilter
 		return (idName == null) ? getFieldCriterion(getPropertyId().toString())
 				: getFieldCriterion(idName + "." + getPropertyId());
 	}
+	
+    public boolean passesFilter(Object itemId, Item item) throws UnsupportedOperationException {
+    	throw new UnsupportedOperationException();
+    }
+
+    public boolean appliesToProperty(Object propertyId) {
+    	return true;
+    }
 
 	@Override
 	public int hashCode()
